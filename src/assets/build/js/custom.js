@@ -181,7 +181,7 @@ var randNum = function () {
 // Panel toolbox
 $(document).ready(function () {
     $('.collapse-link').on('click', function () {
-        alert("ddddd")
+        
         // fix for some div with hardcoded fix class
         if ($(this).closest('.x_panel').attr('style')) {
             $(this).closest('.x_panel').find('.x_content').slideToggle(200, function () {
