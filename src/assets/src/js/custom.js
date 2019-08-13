@@ -151,27 +151,24 @@ var randNum = function () {
 // Panel toolbox
 $(document).ready(function () {
     $('.collapse-link').on('click', function () {
-        var $BOX_PANEL = $(this).closest('.x_panel'),
-            $ICON = $(this).find('i'),
-            $BOX_CONTENT = $BOX_PANEL.find('.x_content');
-
+        
         // fix for some div with hardcoded fix class
-        if ($BOX_PANEL.attr('style')) {
-            $BOX_CONTENT.slideToggle(200, function () {
-                $BOX_PANEL.removeAttr('style');
+        if ($(this).closest('.x_panel').attr('style')) {
+            $(this).closest('.x_panel').find('.x_content').slideToggle(200, function () {
+                $(this).closest('.x_panel').removeAttr('style');
             });
         } else {
-            $BOX_CONTENT.slideToggle(200);
-            $BOX_PANEL.css('height', 'auto');
+            $(this).closest('.x_panel').find('.x_content').slideToggle(200);
+            $(this).closest('.x_panel').css('height', 'auto');
         }
 
-        $ICON.toggleClass('fa-chevron-up fa-chevron-down');
+        $(this).find('i').toggleClass('fa-chevron-up fa-chevron-down');
     });
 
     $('.close-link').click(function () {
         var $BOX_PANEL = $(this).closest('.x_panel');
 
-        $BOX_PANEL.remove();
+        $(this).closest('.x_panel').remove();
     });
 });
 // /Panel toolbox

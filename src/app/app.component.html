@@ -4,7 +4,7 @@
       <div class="left_col scroll-view">
         <div class="navbar nav_title" style="border: 0;">
           <a
-            [routerLink]="['/']"
+            [routerLink]="['/home']"
             routerLinkActive="router-link-active"
             class="site_title"
             ><img src="assets/build/images/logo.png" height="34" width="34" />
@@ -46,7 +46,13 @@
                       >کاربران</a
                     >
                   </li>
-                  
+                  <li>
+                    <a
+                      [routerLink]="['/home']"
+                      routerLinkActive="router-link-active"
+                      >home</a
+                    >
+                  </li>
                 </ul>
               </li>
               <li>

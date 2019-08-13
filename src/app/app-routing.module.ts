@@ -3,9 +3,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { UsersComponent } from './users/users.component';
 import { HomeComponent } from './home/home.component';
 
-
 const routes: Routes = [{ path: '', component: HomeComponent, pathMatch: 'full' },
-{ path: 'users', component: UsersComponent }];
+{ path: 'users', component: UsersComponent },
+{ path: 'home', component: HomeComponent }];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
