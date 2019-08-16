@@ -1,48 +1,24 @@
-<div class="container body">
-  <div class="main_container">
-    <div class="col-md-3 left_col hidden-print">
-      <div class="left_col scroll-view">
-        <div class="navbar nav_title" style="border: 0;">
-          <a
-            [routerLink]="['/']"
-            routerLinkActive="router-link-active"
-            class="site_title"
-            ><img src="assets/build/images/logo.png" height="34" width="34" />
-            <span>یوتاب</span></a
-          >
-        </div>
-        <div class="clearfix"></div>
-        <!-- menu profile quick info -->
-        <div class="profile clearfix">
-          <div class="profile_pic">
-            <img
-              src="assets/build/images/user.png"
-              alt="..."
-              class="img-circle profile_img"
-            />
-          </div>
-          <div class="profile_info">
-            <h2>سعید مرادی</h2>
-          </div>
-        </div>
-
-        <!-- /menu profile quick info -->
-        <br />
-        <!-- sidebar menu -->
-        <app-sidebar-menu></app-sidebar-menu>
-
-        <!-- /sidebar menu -->
-      </div>
+<!-- Preloader -->
+    <div class="preloader">
+      <div class="cssload-speeding-wheel"></div>
     </div>
-    <!-- top navigation -->
-    <app-top-navigation></app-top-navigation>
+    <div id="wrapper">
+      <!-- Top Navigation -->
+      <app-top-navigation></app-top-navigation>
+      <!-- End Top Navigation -->
+      <!-- Left navbar-header -->
+     <app-side-bar></app-side-bar>
+      <!-- Left navbar-header end -->
+      <!-- Page Content -->
+      <div id="page-wrapper">
+        <div class="container-fluid">
 
-    <!-- /top navigation -->
-    <!-- page content -->
-    <router-outlet></router-outlet>
-    <!-- /page content -->
-    <!-- footer content -->
-    <app-footer></app-footer>
-    <!-- /footer content -->
-  </div>
-</div>
+          <router-outlet></router-outlet>
+
+        </div>
+        <!-- /.container-fluid -->
+        
+      </div>
+      <!-- /#page-wrapper -->
+    </div>
+    <!-- /#wrapper -->
