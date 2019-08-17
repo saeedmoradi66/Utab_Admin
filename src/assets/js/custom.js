@@ -206,7 +206,7 @@ $(document).ready(function () {
         size: "5px",
         color: '#dcdcdc'
     });
-    
+
     /* ===== Resize all elements ===== */
 
     body.trigger("resize");
@@ -229,7 +229,7 @@ $(document).ready(function () {
         $("#recoverform").fadeIn();
     });
 
-    /* ================================================================= 
+    /* =================================================================
         Update 1.5
         this is for close icon when navigation open in mobile view
     ================================================================= */
