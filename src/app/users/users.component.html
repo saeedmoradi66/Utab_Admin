@@ -3,7 +3,7 @@
     <h4 class="page-title">کاربران</h4>
   </div>
   <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
-    
+
     <ol class="breadcrumb">
       <li><a href="#">خانه</a></li>
       <li class="active">کاربران</li>
@@ -17,35 +17,23 @@
 <div class="row">
   <div class="col-sm-12">
     <div class="white-box p-l-20 p-r-20">
-     
+
       <div class="row">
         <div class="col-md-12">
           <form class="floating-labels ">
             <div class="form-group m-b-40">
-              <input type="text" class="form-control" id="input1" required><span class="highlight"></span> <span
+              <input type="text" class="form-control" id="txtUserName" name="UserName" [(ngModel)]="UserName" required><span class="highlight"></span> <span
                 class="bar"></span>
-              <label for="input1">Regular Input</label>
+              <label for="input1">نام کاربری </label>
             </div>
             <div class="form-group m-b-40">
-              <input type="password" class="form-control" id="input2" required><span class="highlight"></span> <span
-                class="bar"></span>
-              <label for="input2">Password</label>
+              <input type="password" class="form-control" id="txtPassword"name="Password" [(ngModel)]="Password"  data-toggle="tooltip" data-placement="bottom"
+                title="گذرواژه شامل حرف و عدد باشد" required><span class="highlight"></span> <span class="bar"></span>
+              <label for="input2">گذرواژه</label>
             </div>
-            <div class="form-group m-b-40">
-              <input type="text" class="form-control" id="input3" required><span class="highlight"></span> <span
-                class="bar"></span>
-              <label for="input3">Placeholder</label>
-            </div>
-            <div class="form-group m-b-40">
-              <input type="text" class="form-control" id="input4" required><span class="highlight"></span> <span
-                class="bar"></span>
-              <label for="input4">Helping text</label> <span class="help-block"><small>A block of help text that breaks
-                  onto a new line and may extend beyond one line.</small></span> </div>
-            <div class="form-group m-b-40">
-              <input type="text" class="form-control" id="input5" data-toggle="tooltip" data-placement="bottom"
-                title="input with tooltip!!" required><span class="highlight"></span> <span class="bar"></span>
-              <label for="input5">Input with tooltip</label>
-            </div>
+
+
+
             <div class="form-group m-b-40">
               <select class="form-control p-0" id="input6" required>
                 <option></option>
@@ -54,12 +42,15 @@
                 <option>3</option>
                 <option>4</option>
               </select><span class="highlight"></span> <span class="bar"></span>
-              <label for="input6">Input Select</label>
+              <label for="input6">نقش</label>
             </div>
             <div class="form-group m-b-5">
               <textarea class="form-control" rows="4" id="input7" required></textarea><span class="highlight"></span>
               <span class="bar"></span>
-              <label for="input7">Text area</label>
+              <label for="input7">توضیحات</label>
+            </div>
+            <div class="form-group m-b-40 text-center">
+              <button id="btnSave" class="btn btn-warning waves-effect waves-light">ثبت اطلاعات</button>
             </div>
           </form>
         </div>
