@@ -114,7 +114,8 @@ body {
   }
 }
 .fix-sidebar .top-left-part {
-  background: #fb9678;
+  /* background: #fb9678; */
+  background:#4F5467;
 }
 /*themecolor*/
 .bg-theme {

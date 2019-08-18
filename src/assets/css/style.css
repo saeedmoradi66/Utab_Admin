@@ -4185,7 +4185,7 @@ table.focus-on tbody tr.focused td {
 .error-box {
   height: 100%;
   position: fixed;
-  background: url(../../plugins/images/error-bg.jpg) no-repeat center center #fff !important;
+  background: url(assets/plugins/images/error-bg.jpg) no-repeat center center #fff !important;
   width: 100%;
 }
 .error-box .footer {
@@ -4203,7 +4203,7 @@ table.focus-on tbody tr.focused td {
 }
 /* Login- register pages */
 .login-register {
-  background: url(../../plugins/images/login-register.jpg) no-repeat center center / cover !important;
+  background: url(assets/plugins/images/login-register.jpg) no-repeat center center / cover !important;
   height: 100%;
   position: fixed;
 }

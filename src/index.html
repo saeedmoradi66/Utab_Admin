@@ -21,6 +21,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
       href="assets/plugins/bower_components/bootstrap-rtl-master/dist/css/bootstrap-rtl.min.css"
       rel="stylesheet"
     />
+    <link href="assets/plugins/bower_components/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.datatables.net/buttons/1.2.2/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css" />
     <!-- Menu CSS -->
     <link
       href="assets/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css"
@@ -40,7 +42,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           page. However, you can choose any other skin from folder css / colors .
 -->
     <link
-      href="assets/css/colors/default.css"
+      href="assets/css/colors/default-dark.css"
       id="theme"
       rel="stylesheet"
     />
@@ -63,42 +65,23 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="assets/plugins/bower_components/bootstrap-rtl-master/dist/js/bootstrap-rtl.min.js"></script>
     <!-- Menu Plugin JavaScript -->
     <script src="assets/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
-    <script
-      src="assets/plugins/bower_components/bootstrap-select/bootstrap-select.min.js"
-      type="text/javascript"
-    ></script>
-    <script type="text/javascript">
-      $('.selectpicker').selectpicker();
-    </script>
+    
     <!--slimscroll JavaScript -->
     <script src="assets/js/jquery.slimscroll.js"></script>
     <!--Wave Effects -->
     <script src="assets/js/waves.js"></script>
     <!-- Custom Theme JavaScript -->
-    <script src="assets/js/custom.min.js"></script>
-    <script src="assets/js/validator.js"></script>
-    <script type="text/javascript">
-      $(document).ready(function() {
-        $(document).on('submit', '#selectbox_validate', function() {
-          if ($('div#maindiv').hasClass('has-error')) {
-            $(this)
-              .find('.bootstrap-select')
-              .after(
-                "<h6 class='has-error' style='color:red;'>please select any value from options.</h6>"
-              );
-          }
+    <script src="assets/js/custom.js"></script>
+    <script src="assets/plugins/bower_components/datatables/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable();
         });
-        $('#select').on('changed.bs.select', function(e) {
-          if (!$('div#maindiv').hasClass('has-error')) {
-            $('#selectbox_validate')
-              .find('h6.has-error')
-              .hide();
-          }
-        });
-      });
     </script>
+    
     <script src="assets/js/jasny-bootstrap.js"></script>
     <!--Style Switcher -->
     <script src="assets/plugins/bower_components/styleswitcher/jQuery.style.switcher.js"></script>
+
   </body>
 </html>

@@ -4,7 +4,9 @@
 $(document).ready(function () {
 
     "use strict";
-
+  $('.myMenu').click(function() {
+    $('#myTable').DataTable();
+  });
     var body = $("body");
 
     $(function () {
