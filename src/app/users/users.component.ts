@@ -8,6 +8,9 @@ import {
   NgForm
 } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(
@@ -23,31 +26,39 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   }
 }
 
-export interface PeriodicElement {
+export interface UserData {
+  id: string;
   name: string;
-  position: number;
-  weight: number;
-  symbol: string;
+  progress: string;
+  color: string;
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
-  { position: 2, name: 'Helium', weight: 4.0026, symbol: 'He' },
-  { position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li' },
-  { position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be' },
-  { position: 5, name: 'Boron', weight: 10.811, symbol: 'B' },
-  { position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C' },
-  { position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N' },
-  { position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O' },
-  { position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F' },
-  { position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne' }
+/** Constants used to fill up our data base. */
+const COLORS: string[] = [
+  'maroon', 'red', 'orange', 'yellow', 'olive', 'green', 'purple', 'fuchsia', 'lime', 'teal',
+  'aqua', 'blue', 'navy', 'black', 'gray'
 ];
+const NAMES: string[] = [
+  'Maia', 'Asher', 'Olivia', 'Atticus', 'Amelia', 'Jack', 'Charlotte', 'Theodore', 'Isla', 'Oliver',
+  'Isabella', 'Jasper', 'Cora', 'Levi', 'Violet', 'Arthur', 'Mia', 'Thomas', 'Elizabeth'
+];
+
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css']
+
 })
 export class UsersComponent implements OnInit {
+  constructor(private builder: FormBuilder) {
+    // Create 100 users
+    const users = Array.from({ length: 100 }, (_, k) => createNewUser(k + 1));
+
+    // Assign the data to the data source for the table to render
+    this.dataSource = new MatTableDataSource(users);
+  }
+  resultsLength = 200;
+  isOk = false;
   username = new FormControl('', [
     Validators.required,
     Validators.minLength(5)
@@ -63,16 +74,55 @@ export class UsersComponent implements OnInit {
     description: this.description
   });
   matcher = new MyErrorStateMatcher();
-  constructor(private builder: FormBuilder) {}
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = ELEMENT_DATA;
+  displayedColumns: string[] = ['id', 'name', 'progress', 'color'];
+  dataSource: MatTableDataSource<UserData>;
 
-  
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  timeLeft = 3;
+  interval;
+
+
 
   ngOnInit() {
-   
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+  startTimer() {
+    this.interval = setInterval(() => {
+      if (this.timeLeft > 0) {
+        this.timeLeft--;
+      } else {
+        this.isOk = false;
+      }
+    }, 1000);
   }
   Save() {
     console.log(this.addUserForm.value);
+    this.isOk = true;
+    this.startTimer();
   }
+
+
+
+}
+/** Builds and returns a new User. */
+function createNewUser(id: number): UserData {
+  const name = NAMES[Math.round(Math.random() * (NAMES.length - 1))] + ' ' +
+    NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) + '.';
+
+  return {
+    id: id.toString(),
+    name: name,
+    progress: Math.round(Math.random() * 100).toString(),
+    color: COLORS[Math.round(Math.random() * (COLORS.length - 1))]
+  };
 }

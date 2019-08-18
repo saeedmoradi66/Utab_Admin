@@ -1,11 +1,24 @@
-
 .smoradicms-full-width {
   width: 100%;
   font-family: 'IRANSans';
 }
-.mat-form-field{
+.mat-expansion-panel-header {
+  font-family: iransans;
+}
+.mat-form-field {
   line-height: 2.125;
 }
 table {
   width: 100%;
+}
+
+body,
+div,
+table,
+button {
+  font-family: 'IRANSans';
+}
+.smoradicms-form {
+  display: flex;
+  flex-direction: column;
 }

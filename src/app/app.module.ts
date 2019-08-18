@@ -11,12 +11,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatInputModule } from '@angular/material/input';
-import { MatTableDataSource } from '@angular/material/table';
 import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatTooltipModule } from '@angular/material/tooltip';
 @NgModule({
   declarations: [
     AppComponent,
-
     HomeComponent,
     TopNavigationComponent,
     SideBarComponent,
@@ -31,9 +35,15 @@ import { MatTableModule } from '@angular/material/table';
     MatCheckboxModule,
     MatInputModule,
     MatTableModule,
-    MatTableDataSource
+    MatFormFieldModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatIconModule,
+    MatExpansionModule,
+    MatTooltipModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
