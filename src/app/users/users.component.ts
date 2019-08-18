@@ -11,6 +11,7 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { $ } from 'protractor';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(
@@ -57,6 +58,7 @@ export class UsersComponent implements OnInit {
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource(users);
   }
+  
   resultsLength = 200;
   isOk = false;
   username = new FormControl('', [
@@ -87,6 +89,7 @@ export class UsersComponent implements OnInit {
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+
   }
 
   applyFilter(filterValue: string) {
