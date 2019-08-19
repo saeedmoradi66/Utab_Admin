@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterContentInit } from '@angular/core';
 import {
   Validators,
   FormControl,
@@ -36,19 +36,48 @@ export interface UserData {
 
 /** Constants used to fill up our data base. */
 const COLORS: string[] = [
-  'maroon', 'red', 'orange', 'yellow', 'olive', 'green', 'purple', 'fuchsia', 'lime', 'teal',
-  'aqua', 'blue', 'navy', 'black', 'gray'
+  'maroon',
+  'red',
+  'orange',
+  'yellow',
+  'olive',
+  'green',
+  'purple',
+  'fuchsia',
+  'lime',
+  'teal',
+  'aqua',
+  'blue',
+  'navy',
+  'black',
+  'gray'
 ];
 const NAMES: string[] = [
-  'Maia', 'Asher', 'Olivia', 'Atticus', 'Amelia', 'Jack', 'Charlotte', 'Theodore', 'Isla', 'Oliver',
-  'Isabella', 'Jasper', 'Cora', 'Levi', 'Violet', 'Arthur', 'Mia', 'Thomas', 'Elizabeth'
+  'Maia',
+  'Asher',
+  'Olivia',
+  'Atticus',
+  'Amelia',
+  'Jack',
+  'Charlotte',
+  'Theodore',
+  'Isla',
+  'Oliver',
+  'Isabella',
+  'Jasper',
+  'Cora',
+  'Levi',
+  'Violet',
+  'Arthur',
+  'Mia',
+  'Thomas',
+  'Elizabeth'
 ];
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css']
-
 })
 export class UsersComponent implements OnInit {
   constructor(private builder: FormBuilder) {
@@ -60,13 +89,13 @@ export class UsersComponent implements OnInit {
   }
 
   resultsLength = 200;
-  isOk = false;
+  messageStatus = 0;
   username = new FormControl('', [
     Validators.required,
     Validators.minLength(5)
   ]);
   password = new FormControl('', [Validators.required]);
-  roleID = new FormControl('', [Validators.required]);
+  roleID = new FormControl('', [Validators.required, Validators.min(1)]);
   description = new FormControl('', [Validators.required]);
 
   addUserForm: FormGroup = this.builder.group({
@@ -81,15 +110,12 @@ export class UsersComponent implements OnInit {
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
-  timeLeft = 3;
+  timeLeft = 5;
   interval;
-
-
 
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-
   }
 
   applyFilter(filterValue: string) {
@@ -104,23 +130,27 @@ export class UsersComponent implements OnInit {
       if (this.timeLeft > 0) {
         this.timeLeft--;
       } else {
-        this.isOk = false;
+        this.messageStatus = 0;
+        // this.timeLeft = 3;
+        clearInterval(this.interval);
       }
     }, 1000);
   }
   Save() {
     console.log(this.addUserForm.value);
-    this.isOk = true;
+    this.messageStatus = 2;
+    this.timeLeft = 5;
     this.startTimer();
   }
-
-
 
 }
 /** Builds and returns a new User. */
 function createNewUser(id: number): UserData {
-  const name = NAMES[Math.round(Math.random() * (NAMES.length - 1))] + ' ' +
-    NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) + '.';
+  const name =
+    NAMES[Math.round(Math.random() * (NAMES.length - 1))] +
+    ' ' +
+    NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) +
+    '.';
 
   return {
     id: id.toString(),
