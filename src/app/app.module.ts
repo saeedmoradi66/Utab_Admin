@@ -1,10 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
-import { TopNavigationComponent } from './top-navigation/top-navigation.component';
-import { SideBarComponent } from './side-bar/side-bar.component';
-import { UsersComponent } from './users/users.component';
+import { HomeComponent } from './Components/home/home.component';
+import { TopNavigationComponent } from './Components/top-navigation/top-navigation.component';
+import { SideBarComponent } from './Components/side-bar/side-bar.component';
+import { UsersComponent, UsersDialogComponent } from './Components/users/users.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -18,13 +18,15 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatDialogModule } from '@angular/material/dialog';
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     TopNavigationComponent,
     SideBarComponent,
-    UsersComponent
+    UsersComponent,
+    UsersDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -40,10 +42,10 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatSortModule,
     MatIconModule,
     MatExpansionModule,
-    MatTooltipModule
-
+    MatTooltipModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

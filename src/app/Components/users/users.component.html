@@ -163,7 +163,6 @@
                     خطایی در ثبت اطلاعات به وجود امده است
                   </div>
                 </div>
-                
               </form>
             </div>
           </div>
@@ -187,6 +186,10 @@
       <div class="col-sm-12">
         <div class="white-box">
           <h3 class="box-title m-b-0">لیست کاربران</h3>
+          <hr />
+          <button mat-raised-button color="warn" (click)="openDialog()">
+           <i class="glyphicon glyphicon-plus" ></i> درج کاربر جدید
+          </button>
           <hr />
           <mat-form-field class="smoradicms-full-width">
             <input
@@ -249,10 +252,3 @@
     </div>
   </mat-expansion-panel>
 </mat-accordion>
-<script>
-  $(document).ready(function() {
-    $('button').click(function() {
-      alert('ok');
-    });
-  });
-</script>

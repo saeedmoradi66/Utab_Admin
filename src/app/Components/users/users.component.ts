@@ -11,6 +11,7 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { MatDialog } from '@angular/material/dialog';
 
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -80,7 +81,7 @@ const NAMES: string[] = [
   styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnInit {
-  constructor(private builder: FormBuilder) {
+  constructor(private builder: FormBuilder, public dialog: MatDialog) {
     // Create 100 users
     const users = Array.from({ length: 100 }, (_, k) => createNewUser(k + 1));
 
@@ -142,7 +143,14 @@ export class UsersComponent implements OnInit {
     this.timeLeft = 5;
     this.startTimer();
   }
+  openDialog() {
+    // tslint:disable-next-line: no-use-before-declare
+    const dialogRef = this.dialog.open(UsersDialogComponent);
 
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
 }
 /** Builds and returns a new User. */
 function createNewUser(id: number): UserData {
@@ -159,3 +167,9 @@ function createNewUser(id: number): UserData {
     color: COLORS[Math.round(Math.random() * (COLORS.length - 1))]
   };
 }
+@Component({
+  selector: 'app-users-dialog',
+  templateUrl: './users.dialog.component.html'
+})
+export class UsersDialogComponent {}
+
