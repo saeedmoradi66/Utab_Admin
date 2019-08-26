@@ -55,14 +55,14 @@
                     <div class="form-group">
                       <mat-form-field class="smoradicms-full-width">
                         <mat-label>نقش</mat-label>
-                        <select
-                          matNativeControl
+                        <mat-select
+
                           [formControl]="roleID"
                           [errorStateMatcher]="matcher"
                         >
-                          <option value="0">---</option>
-                          <option value="1">مدیر سایت</option>
-                        </select>
+                          <mat-option value="0">---</mat-option>
+                          <mat-option value="1">مدیر سایت</mat-option>
+                        </mat-select>
                         <mat-error
                           *ngIf="
                             roleID.hasError('required') ||

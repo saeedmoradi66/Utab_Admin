@@ -169,7 +169,8 @@ function createNewUser(id: number): UserData {
 }
 @Component({
   selector: 'app-users-dialog',
-  templateUrl: './users.dialog.component.html'
+  templateUrl: './users.dialog.component.html',
+  styleUrls: ['./users.component.css']
 })
-export class UsersDialogComponent {}
+export class UsersDialogComponent { }
 
