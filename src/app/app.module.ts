@@ -23,6 +23,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
+import { GridModule, ExcelModule } from '@progress/kendo-angular-grid';
+import { RTL } from '@progress/kendo-angular-l10n';
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,9 +50,11 @@ import { MatSelectModule } from '@angular/material/select';
     MatExpansionModule,
     MatTooltipModule,
     MatDialogModule,
-    MatSelectModule
+    MatSelectModule,
+    GridModule,
+    ExcelModule
   ],
-  providers: [],
+  providers: [{ provide: RTL, useValue: true }],
   bootstrap: [AppComponent],
   entryComponents: [UsersDialogComponent]
 })

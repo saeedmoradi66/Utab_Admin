@@ -184,89 +184,90 @@
     <div class="row">
       <div class="col-sm-12">
         <div class="white-box">
+          <h3 class="box-title m-b-0">لیست کاربران</h3>
+          <hr />
           <button mat-raised-button color="warn" (click)="openDialog()">
             <i class="glyphicon glyphicon-plus"></i> درج کاربر جدید
           </button>
           <hr />
-          <div class="col-xs-12">
-            <kendo-grid
-             [groupable]="true"
-              [group]="groups"
-              [data]="gridView"
-              [sort]="state.sort"
-              [pageSize]="state.take"
-              [skip]="state.skip"
-              [resizable]="true"
-              (dataStateChange)="dataStateChange($event)"
-              [pageable]="{
-                buttonCount: buttonCount,
-                info: info,
-                type: type,
-                pageSizes: pageSizes,
-                previousNext: previousNext
-              }"
-              [sortable]="{
-                allowUnsort: allowUnsort,
-                mode: multiple ? 'multiple' : 'single'
-              }"
-              [style.height.%]="100"
+          <mat-form-field class="smoradicms-full-width">
+            <input
+              matInput
+              (keyup)="applyFilter($event.target.value)"
+              placeholder="جستجو"
+            />
+          </mat-form-field>
+
+          <div class="smoradicms-container mat-elevation-z8">
+            <table
+              class="table table-striped table-hover"
+              mat-table
+              [dataSource]="dataSource"
+              matSort
             >
-              <ng-template kendoGridToolbarTemplate>
-                <button type="button" kendoGridExcelCommand icon="file-excel">
-                  Export to Excel
-                </button>
-              </ng-template>
-              <kendo-grid-column field="Id" title="Id" width="100">
-              </kendo-grid-column>
+              <!-- ID Column -->
+              <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>ردیف</th>
+                <td mat-cell *matCellDef="let row">{{ row.id }}</td>
+              </ng-container>
 
-              <kendo-grid-column
-                field="CompanyName"
-                title="CompanyName"
-                width="200"
-              >
-              </kendo-grid-column>
+              <!-- Progress Column -->
+              <ng-container matColumnDef="progress">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                  درصد پیشرفت
+                </th>
+                <td mat-cell *matCellDef="let row">{{ row.progress }}%</td>
+              </ng-container>
 
-              <kendo-grid-column
-                field="ContactName"
-                title="ContactName"
-                width="200"
-              >
-              </kendo-grid-column>
+              <!-- Name Column -->
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>نام</th>
+                <td mat-cell *matCellDef="let row">{{ row.name }}</td>
+              </ng-container>
 
-              <kendo-grid-column
-                field="ContactTitle"
-                title="ContactTitle"
-                width="200"
-              >
-              </kendo-grid-column>
+              <!-- Color Column -->
+              <ng-container matColumnDef="color">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>رنگ</th>
+                <td mat-cell *matCellDef="let row" [style.color]="row.color">
+                  {{ row.color }}
+                </td>
+              </ng-container>
 
-              <kendo-grid-column field="Address" title="Address" width="200">
-              </kendo-grid-column>
+              <tr
+                mat-header-row
+                *matHeaderRowDef="displayedColumns; sticky: true"
+              ></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+            </table>
 
-              <kendo-grid-column field="City" title="City" width="200">
-              </kendo-grid-column>
-
-              <kendo-grid-column
-                field="PostalCode"
-                title="PostalCode"
-                width="150"
-              >
-              </kendo-grid-column>
-
-              <kendo-grid-column field="Country" title="Country" width="200">
-              </kendo-grid-column>
-
-              <kendo-grid-column field="Phone" title="Phone" width="200">
-              </kendo-grid-column>
-
-              <kendo-grid-column field="Fax" title="Fax" width="200">
-              </kendo-grid-column>
-              <kendo-grid-excel
-                fileName="Products.xlsx"
-                [fetchData]="load"
-              ></kendo-grid-excel>
-            </kendo-grid>
+            <mat-paginator
+              [length]="100"
+              [pageSize]="10"
+              [pageSizeOptions]="[5, 10, 25, 100]"
+            ></mat-paginator>
           </div>
+
+          <kendo-grid
+            [data]="gridView"
+            [sort]="state.sort"
+            [pageSize]="state.take"
+            [skip]="state.skip"
+            (dataStateChange)="dataStateChange($event)"
+            [pageable]="{
+              buttonCount: buttonCount,
+              info: info,
+              type: type,
+              pageSizes: pageSizes,
+              previousNext: previousNext
+            }"
+            [height]="400"
+            [sortable]="{
+              allowUnsort: allowUnsort,
+              mode: multiple ? 'multiple' : 'single'
+            }"
+          >
+
+          </kendo-grid>
         </div>
       </div>
     </div>
