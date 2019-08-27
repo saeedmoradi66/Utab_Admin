@@ -11,7 +11,7 @@ import { ErrorStateMatcher } from '@angular/material/core';
 
 import { customers } from './customers';
 import { GridDataResult, PageChangeEvent } from '@progress/kendo-angular-grid';
-import { State, process, GroupDescriptor } from '@progress/kendo-data-query';
+import { State, process, GroupDescriptor, SortDescriptor } from '@progress/kendo-data-query';
 import { Observable } from 'rxjs';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -38,42 +38,25 @@ export class UsersComponent implements OnInit {
     this.loadItems();
   }
   public gridView: GridDataResult;
-  public pageSize = 10;
-  public skip = 0;
+
 
   public buttonCount = 5;
   public info = true;
   public type: 'numeric' | 'input' = 'numeric';
   public pageSizes = true;
   public previousNext = true;
-  public items: any[] = customers;
+  private items: any[] = customers;
   public multiple = true;
   public allowUnsort = true;
-  // public sort: SortDescriptor[] = [
-  //   {
-  //     field: 'CompanyName',
-  //     dir: 'asc'
-  //   },
-  //   {
-  //     field: 'City',
-  //     dir: 'asc'
-  //   }
-  // ];
-  // public sortChange(sort: SortDescriptor[]): void {
-  //   this.sort = sort;
-  //   this.loadItems();
-  // }
-  // public pageChange(event: PageChangeEvent): void {
-  //   this.skip = event.skip;
-  //   this.pageSize = event.take;
-  //   this.loadItems();
-  // }
-  public groups: GroupDescriptor[] = [{ field: 'City' }];
 
   private state: State = {
     skip: 0,
     take: 10,
-    group: this.groups
+    
+    filter: {
+      logic: 'and',
+      filters: []
+    }
   };
 
   protected dataStateChange(state): void {
@@ -84,7 +67,7 @@ export class UsersComponent implements OnInit {
   private loadItems(): void {
     this.gridView = process(this.items, this.state);
   }
-  resultsLength = 200;
+
   messageStatus = 0;
   username = new FormControl('', [
     Validators.required,
@@ -102,7 +85,7 @@ export class UsersComponent implements OnInit {
   });
   matcher = new MyErrorStateMatcher();
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   Save() {
     console.log(this.addUserForm.value);
@@ -115,4 +98,4 @@ export class UsersComponent implements OnInit {
   templateUrl: './users.dialog.component.html',
   styleUrls: ['./users.component.css']
 })
-export class UsersDialogComponent {}
+export class UsersDialogComponent { }

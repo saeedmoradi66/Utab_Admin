@@ -184,19 +184,21 @@
     <div class="row">
       <div class="col-sm-12">
         <div class="white-box">
-          <button mat-raised-button color="warn" (click)="openDialog()">
+          <button mat-raised-button color="warn" >
             <i class="glyphicon glyphicon-plus"></i> درج کاربر جدید
           </button>
           <hr />
           <div class="col-xs-12">
             <kendo-grid
              [groupable]="true"
-              [group]="groups"
+              [group]="state.group"
               [data]="gridView"
               [sort]="state.sort"
               [pageSize]="state.take"
               [skip]="state.skip"
               [resizable]="true"
+              filterable="menu"
+              [filter]="state.filter"
               (dataStateChange)="dataStateChange($event)"
               [pageable]="{
                 buttonCount: buttonCount,
@@ -216,8 +218,6 @@
                   Export to Excel
                 </button>
               </ng-template>
-              <kendo-grid-column field="Id" title="Id" width="100">
-              </kendo-grid-column>
 
               <kendo-grid-column
                 field="CompanyName"
@@ -233,12 +233,8 @@
               >
               </kendo-grid-column>
 
-              <kendo-grid-column
-                field="ContactTitle"
-                title="ContactTitle"
-                width="200"
-              >
-              </kendo-grid-column>
+
+
 
               <kendo-grid-column field="Address" title="Address" width="200">
               </kendo-grid-column>
@@ -246,12 +242,7 @@
               <kendo-grid-column field="City" title="City" width="200">
               </kendo-grid-column>
 
-              <kendo-grid-column
-                field="PostalCode"
-                title="PostalCode"
-                width="150"
-              >
-              </kendo-grid-column>
+
 
               <kendo-grid-column field="Country" title="Country" width="200">
               </kendo-grid-column>
@@ -259,11 +250,17 @@
               <kendo-grid-column field="Phone" title="Phone" width="200">
               </kendo-grid-column>
 
-              <kendo-grid-column field="Fax" title="Fax" width="200">
-              </kendo-grid-column>
+
+
+              <kendo-grid-command-column title="command" width="220">
+                <ng-template kendoGridCellTemplate>
+                  <button kendoGridEditCommand  [primary]="true">Edit</button>
+                  <button kendoGridRemoveCommand  >Delete</button>
+                </ng-template>
+              </kendo-grid-command-column>
               <kendo-grid-excel
                 fileName="Products.xlsx"
-                [fetchData]="load"
+
               ></kendo-grid-excel>
             </kendo-grid>
           </div>
