@@ -11,18 +11,7 @@ import {
 import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatInputModule } from '@angular/material/input';
-import { MatTableModule } from '@angular/material/table';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatSortModule } from '@angular/material/sort';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatSelectModule } from '@angular/material/select';
+import { DialogModule, DialogsModule } from '@progress/kendo-angular-dialog';
 import { GridModule, ExcelModule } from '@progress/kendo-angular-grid';
 import { RTL } from '@progress/kendo-angular-l10n';
 @NgModule({
@@ -39,20 +28,10 @@ import { RTL } from '@progress/kendo-angular-l10n';
     BrowserAnimationsModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    MatButtonModule,
-    MatCheckboxModule,
-    MatInputModule,
-    MatTableModule,
-    MatFormFieldModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatIconModule,
-    MatExpansionModule,
-    MatTooltipModule,
-    MatDialogModule,
-    MatSelectModule,
+    DialogModule,
     GridModule,
-    ExcelModule
+    ExcelModule,
+    DialogsModule
   ],
   providers: [{ provide: RTL, useValue: true }],
   bootstrap: [AppComponent],

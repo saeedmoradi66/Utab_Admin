@@ -1,32 +1,14 @@
-import { Component, OnInit, ViewChild, AfterContentInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   Validators,
   FormControl,
   FormGroup,
-  FormBuilder,
-  FormGroupDirective,
-  NgForm
+  FormBuilder
 } from '@angular/forms';
-import { ErrorStateMatcher } from '@angular/material/core';
 
 import { customers } from './customers';
-import { GridDataResult, PageChangeEvent } from '@progress/kendo-angular-grid';
-import { State, process, GroupDescriptor, SortDescriptor } from '@progress/kendo-data-query';
-import { Observable } from 'rxjs';
-
-export class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(
-    control: FormControl | null,
-    form: FormGroupDirective | NgForm | null
-  ): boolean {
-    const isSubmitted = form && form.submitted;
-    return !!(
-      control &&
-      control.invalid &&
-      (control.dirty || control.touched || isSubmitted)
-    );
-  }
-}
+import { GridDataResult } from '@progress/kendo-angular-grid';
+import { State, process } from '@progress/kendo-data-query';
 
 @Component({
   selector: 'app-users',
@@ -39,8 +21,7 @@ export class UsersComponent implements OnInit {
   }
   public gridView: GridDataResult;
 
-
-  public buttonCount = 5;
+  public buttonCount = 10;
   public info = true;
   public type: 'numeric' | 'input' = 'numeric';
   public pageSizes = true;
@@ -49,24 +30,15 @@ export class UsersComponent implements OnInit {
   public multiple = true;
   public allowUnsort = true;
 
-  private state: State = {
+  public state: State = {
     skip: 0,
     take: 10,
-    
+
     filter: {
       logic: 'and',
       filters: []
     }
   };
-
-  protected dataStateChange(state): void {
-    this.state = state;
-    this.loadItems();
-  }
-
-  private loadItems(): void {
-    this.gridView = process(this.items, this.state);
-  }
 
   messageStatus = 0;
   username = new FormControl('', [
@@ -83,13 +55,31 @@ export class UsersComponent implements OnInit {
     roleID: this.roleID,
     description: this.description
   });
-  matcher = new MyErrorStateMatcher();
+  public opened = true;
 
-  ngOnInit() { }
+  protected dataStateChange(state): void {
+    this.state = state;
+    this.loadItems();
+  }
+
+  private loadItems(): void {
+    this.gridView = process(this.items, this.state);
+  }
+
+  ngOnInit() {}
 
   Save() {
     console.log(this.addUserForm.value);
     this.messageStatus = 2;
+  }
+
+  public close(status) {
+    console.log(`Dialog result: ${status}`);
+    this.opened = false;
+  }
+
+  public open() {
+    this.opened = true;
   }
 }
 
@@ -98,4 +88,4 @@ export class UsersComponent implements OnInit {
   templateUrl: './users.dialog.component.html',
   styleUrls: ['./users.component.css']
 })
-export class UsersDialogComponent { }
+export class UsersDialogComponent {}

@@ -10,261 +10,80 @@
   </div>
   <!-- /.col-lg-12 -->
 </div>
-<mat-accordion>
-  <mat-expansion-panel [expanded]="true">
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        کاربران
-      </mat-panel-title>
-      <mat-panel-description>
-        ثبت کاربر جدید
-      </mat-panel-description>
-    </mat-expansion-panel-header>
 
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="white-box p-l-20 p-r-20">
-          <div class="row">
-            <div class="col-md-12">
-              <form
-                class="smoradicms-form"
-                [formGroup]="addUserForm"
-                (ngSubmit)="Save()"
-              >
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <mat-form-field class="smoradicms-full-width">
-                        <input
-                          matInput
-                          placeholder="نام کاربری"
-                          [formControl]="username"
-                          [errorStateMatcher]="matcher"
-                        />
+<div class="row">
+  <div class="col-sm-12">
+    <div class="white-box">
+      <hr />
+      <div>
+        <button kendoButton *ngIf="!opened" (click)="open()">
+          Open dialog
+        </button>
+        <kendo-grid
+          [groupable]="true"
+          [group]="state.group"
+          [data]="gridView"
+          [sort]="state.sort"
+          [pageSize]="state.take"
+          [skip]="state.skip"
+          [resizable]="true"
+          filterable="menu"
+          [filter]="state.filter"
+          (dataStateChange)="dataStateChange($event)"
+          [pageable]="{
+            buttonCount: buttonCount,
+            info: info,
+            type: type,
+            pageSizes: pageSizes,
+            previousNext: previousNext
+          }"
+          [sortable]="{
+            allowUnsort: allowUnsort,
+            mode: multiple ? 'multiple' : 'single'
+          }"
+          [style.height.%]="100"
+        >
+          <ng-template kendoGridToolbarTemplate>
+            <button type="button" kendoGridExcelCommand icon="file-excel">
+              Export to Excel
+            </button>
+          </ng-template>
 
-                        <mat-error *ngIf="username.hasError('required')">
-                          نام کاربری را به درستی وارد نمایید
-                        </mat-error>
-                        <mat-error *ngIf="username.hasError('minlength')">
-                          نام کاربری باید بزرگتر از 5 حرف باشد
-                        </mat-error>
-                      </mat-form-field>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <mat-form-field class="smoradicms-full-width">
-                        <mat-label>نقش</mat-label>
-                        <mat-select
-                          [formControl]="roleID"
-                          [errorStateMatcher]="matcher"
-                        >
-                          <mat-option value="0">---</mat-option>
-                          <mat-option value="1">مدیر سایت</mat-option>
-                        </mat-select>
-                        <mat-error
-                          *ngIf="
-                            roleID.hasError('required') ||
-                            roleID.hasError('min')
-                          "
-                          >نقش را انتخاب کنید</mat-error
-                        >
-                      </mat-form-field>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <mat-form-field class="smoradicms-full-width">
-                        <input
-                          matInput
-                          placeholder="گذرواژه "
-                          type="password"
-                          [formControl]="password"
-                          [errorStateMatcher]="matcher"
-                        />
+          <kendo-grid-column
+            field="CompanyName"
+            title="CompanyName"
+            width="200"
+          >
+          </kendo-grid-column>
 
-                        <mat-error *ngIf="password.hasError('required')">
-                          گذرواژه را به درستی وارد نمایید
-                        </mat-error>
-                      </mat-form-field>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <mat-form-field class="smoradicms-full-width">
-                        <input
-                          matInput
-                          placeholder="تکرار گذرواژه "
-                          type="password"
-                          [formControl]="password"
-                          [errorStateMatcher]="matcher"
-                        />
+          <kendo-grid-column
+            field="ContactName"
+            title="ContactName"
+            width="200"
+          >
+          </kendo-grid-column>
 
-                        <mat-error *ngIf="password.hasError('required')">
-                          تکرار گذرواژه را به درستی وارد نمایید
-                        </mat-error>
-                      </mat-form-field>
-                    </div>
-                  </div>
-                </div>
+          <kendo-grid-column field="Address" title="Address" width="200">
+          </kendo-grid-column>
 
-                <div class="form-group">
-                  <mat-form-field class="smoradicms-full-width">
-                    <textarea
-                      matInput
-                      placeholder="توضیحات "
-                      [formControl]="description"
-                      [errorStateMatcher]="matcher"
-                      rows="4"
-                    ></textarea>
-                    <mat-hint align="end"
-                      >{{ description.value.length }} / 256</mat-hint
-                    >
-                    <mat-error *ngIf="description.hasError('required')">
-                      توضیحات را به درستی وارد نمایید
-                    </mat-error>
-                  </mat-form-field>
-                </div>
-                <div class="form-group m-b-40 text-center">
-                  <button
-                    mat-raised-button
-                    color="primary"
-                    [disabled]="!addUserForm.valid"
-                    matTooltip="ثبت اطلاعات کاربر جدید"
-                  >
-                    ثبت اطلاعات
-                  </button>
-                </div>
+          <kendo-grid-column field="City" title="City" width="200">
+          </kendo-grid-column>
 
-                <div class="text-center">
-                  <div
-                    class="alert alert-success"
-                    *ngIf="messageStatus == 1"
-                    role="alert"
-                  >
-                    <button type="button" class="close" data-dismiss="alert">
-                      x
-                    </button>
+          <kendo-grid-column field="Country" title="Country" width="200">
+          </kendo-grid-column>
 
-                    اطلاعات با موفقیت ثبت گردید
-                  </div>
-                  <div
-                    class="alert alert-danger"
-                    *ngIf="messageStatus == 2"
-                    role="alert"
-                  >
-                    <button type="button" class="close" data-dismiss="alert">
-                      x
-                    </button>
+          <kendo-grid-column field="Phone" title="Phone" width="200">
+          </kendo-grid-column>
 
-                    خطایی در ثبت اطلاعات به وجود امده است
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
+          <kendo-grid-command-column title="command" width="220">
+            <ng-template kendoGridCellTemplate>
+              <button kendoGridEditCommand [primary]="true">Edit</button>
+              <button kendoGridRemoveCommand>Delete</button>
+            </ng-template>
+          </kendo-grid-command-column>
+          <kendo-grid-excel fileName="Products.xlsx"></kendo-grid-excel>
+        </kendo-grid>
       </div>
     </div>
-  </mat-expansion-panel>
-</mat-accordion>
-<hr />
-<mat-accordion>
-  <mat-expansion-panel [expanded]="true">
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        لیست کاربران
-      </mat-panel-title>
-      <mat-panel-description>
-        مشاهده و جستجوی اطلاعات
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="white-box">
-          <button mat-raised-button color="warn" >
-            <i class="glyphicon glyphicon-plus"></i> درج کاربر جدید
-          </button>
-          <hr />
-          <div class="col-xs-12">
-            <kendo-grid
-             [groupable]="true"
-              [group]="state.group"
-              [data]="gridView"
-              [sort]="state.sort"
-              [pageSize]="state.take"
-              [skip]="state.skip"
-              [resizable]="true"
-              filterable="menu"
-              [filter]="state.filter"
-              (dataStateChange)="dataStateChange($event)"
-              [pageable]="{
-                buttonCount: buttonCount,
-                info: info,
-                type: type,
-                pageSizes: pageSizes,
-                previousNext: previousNext
-              }"
-              [sortable]="{
-                allowUnsort: allowUnsort,
-                mode: multiple ? 'multiple' : 'single'
-              }"
-              [style.height.%]="100"
-            >
-              <ng-template kendoGridToolbarTemplate>
-                <button type="button" kendoGridExcelCommand icon="file-excel">
-                  Export to Excel
-                </button>
-              </ng-template>
-
-              <kendo-grid-column
-                field="CompanyName"
-                title="CompanyName"
-                width="200"
-              >
-              </kendo-grid-column>
-
-              <kendo-grid-column
-                field="ContactName"
-                title="ContactName"
-                width="200"
-              >
-              </kendo-grid-column>
-
-
-
-
-              <kendo-grid-column field="Address" title="Address" width="200">
-              </kendo-grid-column>
-
-              <kendo-grid-column field="City" title="City" width="200">
-              </kendo-grid-column>
-
-
-              <kendo-grid-column field="Country" title="Country" width="200">
-              </kendo-grid-column>
-
-              <kendo-grid-column field="Phone" title="Phone" width="200">
-              </kendo-grid-column>
-
-
-
-              <kendo-grid-command-column title="command" width="220">
-                <ng-template kendoGridCellTemplate>
-                  <button kendoGridEditCommand  [primary]="true">Edit</button>
-                  <button kendoGridRemoveCommand  >Delete</button>
-                </ng-template>
-              </kendo-grid-command-column>
-              <kendo-grid-excel
-                fileName="Products.xlsx"
-
-              ></kendo-grid-excel>
-            </kendo-grid>
-          </div>
-        </div>
-      </div>
-    </div>
-  </mat-expansion-panel>
-</mat-accordion>
+  </div>
+</div>
